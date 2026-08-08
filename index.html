@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>少年维特之烦恼 · 歌德 · 1774 — 一场关于"感觉"的讲座</title>
+<meta name="description" content="基于德文原文（汉堡版）全量深读的《少年维特之烦恼》讲座页：信的密度、四季的节奏、一个词的爱情，以及没有教士送葬的终局。">
+<style>
+:root{
+  --bg0:#060a14; --bg1:#0b1222; --bg2:#101a30; --bg3:#16223d;
+  --ink:#e9e6dd; --dim:#98a1b3; --faint:#5c6577;
+  --gold:#e8b64c; --ember:#e07b39; --ice:#7fa8d9; --blood:#c2453a;
+  --line:rgba(232,182,76,.18);
+  --serif:"Georgia","Songti SC","SimSun",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--ink);font-family:var(--sans);line-height:1.75;overflow-x:hidden}
+::selection{background:rgba(232,182,76,.35)}
+
+/* 星空噪点背景 */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.28) 50%, transparent 51%),
+    radial-gradient(1px 1px at 32% 62%, rgba(255,255,255,.18) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 58% 28%, rgba(255,255,255,.15) 50%, transparent 51%),
+    radial-gradient(1px 1px at 76% 74%, rgba(255,255,255,.20) 50%, transparent 51%),
+    radial-gradient(1px 1px at 88% 34%, rgba(255,255,255,.14) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 22% 84%, rgba(255,255,255,.12) 50%, transparent 51%),
+    radial-gradient(1px 1px at 45% 46%, rgba(255,255,255,.10) 50%, transparent 51%),
+    radial-gradient(ellipse at 50% 120%, rgba(26,42,84,.55), transparent 70%);
+}
+
+/* 顶部进度条 */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--ember));z-index:100;transition:width .15s linear}
+
+/* 章节 */
+section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9vh 7vw 9vh}
+.wrap{max-width:1060px;width:100%;margin:0 auto}
+
+.kicker{font-size:.8rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:1.2rem;font-weight:600}
+.kicker .no{color:var(--faint);margin-right:.6em}
+h2.title{font-size:clamp(1.7rem,4.6vw,3.1rem);line-height:1.25;font-weight:700;margin-bottom:1.6rem}
+h2.title em{font-style:normal;color:var(--gold)}
+p.lead{font-size:clamp(1rem,2vw,1.22rem);color:var(--dim);max-width:60ch}
+p{margin-bottom:1rem}
+.dim{color:var(--dim)}
+.faint{color:var(--faint)}
+.gold{color:var(--gold)} .ember{color:var(--ember)} .ice{color:var(--ice)} .blood{color:var(--blood)}
+
+/* 引文块 */
+blockquote.quote{border-left:3px solid var(--gold);padding:.4rem 0 .4rem 1.4rem;margin:1.6rem 0}
+blockquote.quote .de{font-family:var(--serif);font-size:clamp(1.25rem,3vw,1.9rem);line-height:1.5;color:var(--ink);font-style:italic}
+blockquote.quote .zh{color:var(--dim);margin-top:.7rem;font-size:1rem}
+blockquote.quote .src{margin-top:.5rem;font-size:.78rem;color:var(--faint);letter-spacing:.08em}
+blockquote.quote.bloody{border-left-color:var(--blood)}
+blockquote.quote.bloody .de{color:#e8c9c2}
+
+/* 双栏（维特 vs 阿尔贝特） */
+.duel{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem}
+.duel .side{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.4rem 1.5rem}
+.duel .side h4{font-size:.85rem;letter-spacing:.2em;margin-bottom:.8rem}
+.duel .side.w .h{color:var(--ember)} .duel .side.a .h{color:var(--ice)}
+.duel .side p{font-size:.95rem;color:var(--dim)}
+
+/* 卡片 */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.8rem}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.3rem;transition:transform .25s ease,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(232,182,76,.45)}
+.card .big{font-size:1.7rem;font-weight:800;color:var(--gold);font-family:var(--serif)}
+.card h4{font-size:1rem;margin:.4rem 0 .4rem;color:var(--ink)}
+.card p{font-size:.86rem;color:var(--dim);margin:0}
+
+/* 时间轴 */
+.timeline{position:relative;margin:2rem 0 0;padding-left:1.6rem;border-left:1px solid var(--line)}
+.tl-item{position:relative;padding:0 0 1.7rem 1rem}
+.tl-item::before{content:"";position:absolute;left:-1.66rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.tl-item.cold::before{background:var(--ice)}
+.tl-item.fatal::before{background:var(--blood)}
+.tl-item .d{font-family:var(--serif);font-size:.95rem;color:var(--gold);letter-spacing:.05em}
+.tl-item.cold .d{color:var(--ice)} .tl-item.fatal .d{color:var(--blood)}
+.tl-item h4{font-size:1.05rem;margin:.2rem 0 .3rem}
+.tl-item p{font-size:.9rem;color:var(--dim);margin:0}
+
+/* 数字统计带 */
+.statrow{display:flex;flex-wrap:wrap;gap:1.2rem;margin:1.8rem 0}
+.stat{flex:1;min-width:130px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1rem 1.2rem;text-align:center}
+.stat .n{font-size:2rem;font-weight:800;color:var(--gold);font-family:var(--serif)}
+.stat .l{font-size:.78rem;color:var(--dim);letter-spacing:.12em;margin-top:.2rem}
+
+/* 图表容器 */
+.chartbox{background:var(--bg1);border:1px solid var(--line);border-radius:12px;padding:1.4rem;margin-top:1.6rem}
+.chartbox h4{font-size:.85rem;letter-spacing:.2em;color:var(--faint);margin-bottom:.8rem}
+svg{width:100%;height:auto;display:block}
+
+/* 对照卡（点击翻转） */
+.flip{perspective:1200px;margin:1.8rem 0;cursor:pointer;max-width:640px}
+.flip-inner{position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,.1,.2,1)}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:1.8rem 2rem;border:1px solid var(--line);background:linear-gradient(145deg,var(--bg2),var(--bg1))}
+.flip-front .de{font-family:var(--serif);font-size:clamp(1.2rem,2.8vw,1.7rem);font-style:italic;line-height:1.5}
+.flip-front .tip{font-size:.72rem;color:var(--faint);margin-top:.8rem;letter-spacing:.1em}
+.flip-back{position:absolute;inset:0;transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center}
+.flip-back .zh{font-size:clamp(1rem,2.2vw,1.25rem);color:var(--ink)}
+.flip-back .src{font-size:.75rem;color:var(--faint);margin-top:.8rem}
+
+/* 封面 */
+#cover{min-height:100vh;justify-content:center;text-align:center;padding:6vh 5vw}
+#cover .book{font-family:var(--serif);font-size:clamp(2.6rem,8vw,5.6rem);font-weight:700;line-height:1.15;letter-spacing:.04em}
+#cover .book .j{display:block;color:var(--gold)}
+#cover .sub{margin-top:2rem;font-size:clamp(.95rem,2vw,1.2rem);color:var(--dim);letter-spacing:.3em}
+#cover .meta{margin-top:3rem;font-size:.82rem;color:var(--faint);letter-spacing:.25em}
+#cover .scrollhint{position:absolute;bottom:3vh;left:0;right:0;font-size:.75rem;color:var(--faint);letter-spacing:.3em;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* 闪电分隔 */
+.bolt{display:flex;align-items:center;gap:1rem;margin:2.4rem 0 1.4rem;color:var(--gold);font-size:.75rem;letter-spacing:.3em}
+.bolt::before,.bolt::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
+.bolt::after{background:linear-gradient(90deg,var(--line),transparent)}
+
+/* 终局大字 */
+.final-line{font-family:var(--serif);font-size:clamp(1.4rem,3.6vw,2.6rem);font-style:italic;line-height:1.5;color:#e8c9c2;margin:2rem 0}
+
+/* 影响史横卡 */
+.hscroll{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-top:1.8rem}
+.hcard{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.3rem}
+.hcard .yr{font-family:var(--serif);color:var(--ember);font-size:1.3rem;font-weight:700}
+.hcard h4{font-size:1rem;margin:.3rem 0}
+.hcard p{font-size:.85rem;color:var(--dim);margin:0}
+
+/* 反方双块 */
+.verdict{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem}
+.verdict .v{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.4rem 1.5rem}
+.verdict .v.against{border-color:rgba(194,69,58,.4)}
+.verdict .v.for{border-color:rgba(232,182,76,.4)}
+.verdict h4{font-size:.85rem;letter-spacing:.18em;margin-bottom:.7rem}
+.verdict .v.against h4{color:var(--blood)} .verdict .v.for h4{color:var(--gold)}
+.verdict p{font-size:.92rem;color:var(--dim);margin:0}
+
+/* 页脚 */
+footer{position:relative;z-index:1;padding:3rem 7vw 4rem;text-align:center;color:var(--faint);font-size:.78rem;line-height:2;border-top:1px solid rgba(232,182,76,.08)}
+footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spacing:.2em}
+
+/* 滚动渐入 */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}
+
+/* 响应式 */
+@media(max-width:1024px){
+  section{padding:8vh 6vw}
+}
+@media(max-width:640px){
+  section{padding:7vh 5.5vw}
+  .duel,.verdict{grid-template-columns:1fr}
+  .flip-back{position:static;transform:none;margin-top:0}
+  .flip.flipped .flip-inner{transform:none}
+  .flip-inner{display:grid;gap:1rem}
+  blockquote.quote{padding-left:1rem}
+}
+@media(min-width:1600px){
+  section{min-height:100vh}
+  .wrap{max-width:1180px}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .scrollhint{animation:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- 01 封面 -->
+<section id="cover">
+  <div class="wrap reveal">
+    <div class="kicker" style="text-align:center">Johann Wolfgang von Goethe · 1749–1832</div>
+    <h1 class="book"><span class="j">少年维特之烦恼</span>Die Leiden des jungen Werther</h1>
+    <div class="sub">1774 · 狂飙突进的第一声啼哭</div>
+    <div class="meta">一场关于"感觉"的讲座 · 基于德文原文（汉堡版）全量深读</div>
+  </div>
+  <div class="scrollhint">向下滚动，进入 1771 年的那个夏天</div>
+</section>
+
+<!-- 02 钩子 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">02</span>为什么 250 年后还要读</div>
+    <h2 class="title reveal d1">每个时代，<em>都有自己的维特</em></h2>
+    <p class="lead reveal d2">1774 年，一本小书让整个欧洲陷入狂热：青年们穿黄背心蓝外套，模仿主人公自杀，教会与政府下令查禁。250 年后的今天，我们仍在用另一个名字谈论它——<span class="gold">"维特效应"</span>，社会心理学研究自杀模仿的专有名词。</p>
+    <p class="lead reveal d2">但真正让它不朽的不是悲剧本身，而是它写出的那种体验：<span class="ember">在抗抑郁药出现之前两百年，歌德已经写出了抑郁的地质学。</span></p>
+    <div class="statrow reveal d3">
+      <div class="stat"><div class="n">1774</div><div class="l">初版出版</div></div>
+      <div class="stat"><div class="n">7 次</div><div class="l">拿破仑行军中的阅读</div></div>
+      <div class="stat"><div class="n">×N</div><div class="l">欧洲多国查禁</div></div>
+      <div class="stat"><div class="n">250 年</div><div class="l">至今仍是文学史坐标</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 诞生 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">03</span>这本书是怎么来的</div>
+    <h2 class="title reveal d1">四个星期的梦游，<em>一次文学自杀</em></h2>
+    <div class="timeline reveal d2">
+      <div class="tl-item"><div class="d">1772 · 韦茨拉尔</div><h4>实习生的爱情</h4><p>25 岁的歌德到帝国最高法院实习，在一次乡村舞会上遇见法官之女夏绿蒂·布甫——她已订婚。舞会细节（切面包、雷雨、华尔兹）后来几乎原样写进 6 月 16 日那封信。</p></div>
+      <div class="tl-item"><div class="d">1772.10.30</div><h4>耶路撒冷之死</h4><p>朋友卡尔·威廉·耶路撒冷因单恋有夫之妇，借走克斯特纳的手枪自杀。歌德向当事人详细询问经过——这些材料直接进入小说的结尾。</p></div>
+      <div class="tl-item"><div class="d">1774 年春</div><h4>四周成书</h4><p>歌德说，他写《维特》时"像个梦游者"，把内心的真实与耶路撒冷的遭遇糅合在一起，一气呵成。</p></div>
+      <div class="tl-item cold"><div class="d">1774.9.28</div><h4>莱比锡书展</h4><p>一经出版即引爆"维特热"。歌德活了 82 岁，写了《浮士德》，成了魏玛的枢密顾问——维特替他死了一次。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 书信体 + 密度图 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">04</span>形式即内容</div>
+    <h2 class="title reveal d1">书信体 = <em>心跳监测仪</em></h2>
+    <p class="lead reveal d2">全书是维特写给挚友威廉的信。没有叙述者，没有解释，只有一颗心直接搏动在纸上。读这本书，先读信的"心电图"：</p>
+    <div class="chartbox reveal d2">
+      <h4>▲ 德文原文 83 封信的长度分布（汉堡版，逐行统计）</h4>
+      <svg id="densityChart" viewBox="0 0 1060 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="信件密度图：第一编五个月36封信密集且长，第二编十四个个月44封信稀疏且短"></svg>
+      <p class="faint" style="font-size:.78rem;margin-top:.6rem">第一编：1771.5.4 – 9.10 · 36 封　|　第二编：1771.10.20 – 1772.12.6 · 44 封　|　编者叙述内嵌 3 封</p>
+    </div>
+    <p class="lead reveal d3" style="margin-top:1.4rem"><span class="gold">信越密，心越烫；信越稀，心越冷。</span>第一编五个月 36 封，密到隔日一封、越写越长；第二编一年零两个月 44 封，1772 年春夏出现大段沉默。到 12 月信重新变密——那是死亡前的回光返照。</p>
+  </div>
+</section>
+
+<!-- 05 四季时间轴 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">05</span>节奏地图</div>
+    <h2 class="title reveal d1">四季即命运：<em>情绪的地质学</em></h2>
+    <div class="chartbox reveal d2">
+      <h4>▲ 情绪弧线（示意：依据关键信件的文本证据）</h4>
+      <svg id="arcChart" viewBox="0 0 1060 260" preserveAspectRatio="xMidYMid meet" role="img" aria-label="情绪弧线：从陶醉到狂喜到耗竭到绝望到决绝"></svg>
+    </div>
+    <div class="timeline reveal d3">
+      <div class="tl-item"><div class="d">1771 春 · 5 月</div><h4>逃离与陶醉</h4><p>"我多么高兴，我走了！"——田园、井泉、荷马的摇篮曲，自然的顶峰礼赞。</p></div>
+      <div class="tl-item"><div class="d">1771 夏 · 6–7 月</div><h4>狂喜巅峰</h4><p>6/16 舞会初遇绿蒂，7/13"她爱我！"——幸福与折磨的涨潮期。</p></div>
+      <div class="tl-item"><div class="d">1771 秋 · 8–9 月</div><h4>转向</h4><p>8/12 界限之争，8/18"自然吞噬"之信，9/10 告别夜。第一编落幕。</p></div>
+      <div class="tl-item cold"><div class="d">1771 冬 – 1772 春</div><h4>社会的窒息</h4><p>公使职位、伯爵宴会被逐、市民阶级的墙。信变得稀疏、麻木。</p></div>
+      <div class="tl-item"><div class="d">1772 秋 – 冬</div><h4>复燃与决绝</h4><p>重返瓦尔海姆，莪相之夜，12/20 预告、12/21 绝笔，12/22 正午十二时，手枪。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 开篇悖论 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">06</span>第一句话</div>
+    <h2 class="title reveal d1">全书以一个悖论开场</h2>
+    <div class="flip reveal d2" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div class="de">"Wie froh bin ich, daß ich weg bin!"</div>
+          <div class="tip">轻触翻面 →</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="zh">"我多么高兴，我走了！"——离开最亲爱的人，却感到解脱的狂喜。</div>
+          <div class="src">Am 4. Mai 1771 ｜ 关惠文译意</div>
+        </div>
+      </div>
+    </div>
+    <p class="lead reveal d3">紧接着是一连串自我审讯：我有没有喂养她的感情？我有没有在那些真诚的自然流露里取乐？——句句被破折号打断，像呼吸一样急促。然后他发誓："我要改过自新。"<span class="gold">读者第一页就知道：这个誓言会落空。</span>全书就是在"决心改善"与"被感觉卷走"之间的拉锯。</p>
+  </div>
+</section>
+
+<!-- 07 田园 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">07</span>第一幕 · 田园</div>
+    <h2 class="title reveal d1">自然的顶峰礼赞，<em>与艺术的失效</em></h2>
+    <blockquote class="quote reveal d2">
+      <div class="de">"Ich könnte jetzt nicht zeichnen, nicht einen Strich, und bin nie ein größerer Maler gewesen als in diesen Augenblicken."</div>
+      <div class="zh">我现在一笔也画不出来，可我从没像此刻这样，是一个更伟大的画家。</div>
+      <div class="src">Am 10. Mai ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">5 月 10 日，维特躺在溪边高草里，看虫蚁的世界、感受"全能者的在场"——<span class="ember">恰恰是感觉最饱满时，表达失效了。</span>体验的充盈压倒艺术，这是第一编的核心脉搏。</p>
+    <blockquote class="quote reveal d3">
+      <div class="de">"ich brauche Wiegengesang, und den habe ich in seiner Fülle gefunden in meinem Homer."</div>
+      <div class="zh">我要的不是引导，是摇篮曲——我在荷马那里找到了它。</div>
+      <div class="src">Am 13. Mai ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">他拒绝朋友寄书："我不要被引导、被激励。"<span class="gold">荷马 = 摇篮曲</span>：他不要理性的堤坝，只要抚慰。井泉边的"族长时代"幻想、孩子的纯真、农夫少年"全身心的爱"——他先爱上了"爱"这种状态本身。</p>
+  </div>
+</section>
+
+<!-- 08 6/16 心脏 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">08</span>全书的心脏 · 1771.6.16</div>
+    <h2 class="title reveal d1">一个词的爱情：<em>"Klopstock!"</em></h2>
+    <p class="lead reveal d2">马车赴乡村舞会，途中接绿蒂。关惠文译本这样记初见：</p>
+    <blockquote class="quote reveal d2">
+      <div class="zh" style="color:var(--ink);font-style:normal">"在前厅里，有六个从两岁到十一岁大小的孩子簇拥在一个姑娘周围。那姑娘长得极美，中等身材，穿一件朴素的白裙，袖子和胸前装饰着浅红色的蝴蝶结。她正拿着一块黑面包，按照各人的年龄和饭量切成片，亲切地分给周围的孩子们。"</div>
+      <div class="src">六月十六日 ｜ 关惠文译</div>
+    </blockquote>
+    <p class="lead reveal d3">舞会上华尔兹"像天体般旋转"；雷雨中她组织孩子们"数数"转移恐惧；然后——窗前，她对维特说出一个词：</p>
+    <div class="flip reveal d3" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div class="de" style="font-size:clamp(1.6rem,4vw,2.6rem)">"Klopstock!"</div>
+          <div class="tip">轻触翻面 →</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="zh">克洛普施托克——德国诗人，颂歌《春的庆典》的作者。两人因同一首诗的狂喜而心灵相通，他吻了她的手。</div>
+          <div class="src">六月十六日 ｜ 关惠文译</div>
+        </div>
+      </div>
+    </div>
+    <blockquote class="quote reveal d3">
+      <div class="de">"Ich war kein Mensch mehr."</div>
+      <div class="zh">我不再是人了。</div>
+      <div class="src">Am 16. Junius ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3"><span class="gold">爱 = 一个词就懂的共鸣。</span>这是全书对爱情的定义。同夜他得知：绿蒂已与阿尔贝特订婚。</p>
+  </div>
+</section>
+
+<!-- 09 8/12 界限 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">09</span>思想的枢纽 · 1771.8.12</div>
+    <h2 class="title reveal d1">界限之争：<em>手枪桌上的哲学</em></h2>
+    <p class="lead reveal d2">阿尔贝特已归来。一次谈话中，阿尔贝特拿起维特桌上的手枪，说自杀是"软弱"——于是有了全书最锋利的一场对话：</p>
+    <div class="duel reveal d2">
+      <div class="side w">
+        <h4 class="h">维特 · 感觉这一岸</h4>
+        <p>人的天性有承受的极限，越过即毁灭——如同高烧致死，不能算怯懦。人掉进水里被淹没，不能说"这太容易了，他怎么不爬上来"。他讲溺死的少女：被抛弃，在河边徘徊，那不是疯狂，是"为她的命运寻找出路"。</p>
+      </div>
+      <div class="side a">
+        <h4 class="h">阿尔贝特 · 理性这一岸</h4>
+        <p>自杀就是软弱。人应当承受、应当忍耐，用理性克服激情。选择结束生命，是对责任与秩序的背叛——"一个头脑健全的人"不会这样做。</p>
+      </div>
+    </div>
+    <blockquote class="quote reveal d3">
+      <div class="de">"Wir gingen auseinander, ohne einander verstanden zu haben. Wie denn auf dieser Welt keiner leicht den andern versteht."</div>
+      <div class="zh">我们分手了，彼此并未理解对方。这世上本就没人容易理解另一个人。</div>
+      <div class="src">Am 12. August ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">中间是深渊。这场对话没有胜负——它把问题留给了 250 年后的我们：<span class="ember">当一个人说"我撑不住了"，我们该用"软弱"来回答，还是承认极限的存在？</span></p>
+  </div>
+</section>
+
+<!-- 10 8/18 转折 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">10</span>情绪的转折 · 1771.8.18</div>
+    <h2 class="title reveal d1">自然吞噬：<em>抑郁的地质学</em></h2>
+    <blockquote class="quote reveal d2">
+      <div class="de">"Mußte denn das so sein, daß das, was des Menschen Glückseligkeit macht, wieder die Quelle seines Elendes würde?"</div>
+      <div class="zh">难道人幸福之源，必然又成为他苦难之源吗？</div>
+      <div class="src">Am 18. August ｜ 参考译文</div>
+    </blockquote>
+    <blockquote class="quote bloody reveal d3">
+      <div class="de">"ich sehe nichts als ein ewig verschlingendes, ewig wiederkäuendes Ungeheuer."</div>
+      <div class="zh">我什么也看不见，只看见一个永恒吞噬、永恒反刍的怪物。</div>
+      <div class="src">Am 18. August ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">三个月前还是"神圣生命之流"的世界，如今成了一座"永恒敞开的坟墓之渊"。<span class="blood">不是自然变了，是维特的心变了——自然是他心灵的镜子。</span>这是全书最著名的转折，也是对抑郁体验最早的精确文学描述之一：滋养你的东西，开始吞噬你。</p>
+  </div>
+</section>
+
+<!-- 11 社会 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">11</span>第二幕 · 社会的绞杀</div>
+    <h2 class="title reveal d1">致命的，不只是爱情</h2>
+    <blockquote class="quote reveal d2">
+      <div class="de">"Was mich am meisten neckt, sind die fatalen bürgerlichen Verhältnisse."</div>
+      <div class="zh">最折磨我的，是那些该死的市民等级关系。</div>
+      <div class="src">Am 24. Dezember 1771 ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">第二编的主题从"爱的绝望"扩为"社会的窒息"：迂腐的公使、僵化的礼仪、以及最锋利的一刀——伯爵晚宴上，维特被当众请出，因为他是市民，贵族不愿与他同席。他站在门外看着灯火，第一次感到"被人从桌前赶了出来"。</p>
+    <p class="lead reveal d3"><span class="gold">维特的绝望，三分之二是结构性的。</span>歌德写的不是一个人的心理崩溃，而是一个世代的结构困境，借一颗心爆发。</p>
+  </div>
+</section>
+
+<!-- 12 莪相之夜 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">12</span>黑暗倒影</div>
+    <h2 class="title reveal d1">同一个词，<em>第二次是决裂</em></h2>
+    <blockquote class="quote reveal d2">
+      <div class="de">"Ossian hat in meinem Herzen den Humor verdrängt."</div>
+      <div class="zh">莪相已从我心中挤走了欢愉。</div>
+      <div class="src">Am 10. Oktober 1772 ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">重返瓦尔海姆的维特，为绿蒂朗读自己翻译的莪相《塞尔玛之歌》。读至动情处，绿蒂落泪，他抓住她的手跪倒——她对他"既恼又爱，身子不住哆嗦"，说出全书最狠的一句话：</p>
+    <blockquote class="quote bloody reveal d3">
+      <div class="de">"Das ist das letzte Mal! Werther! Sie sehn mich nicht wieder."</div>
+      <div class="zh">这是最后一次！维特！你不会再见到我了。</div>
+      <div class="src">编者叙述 · 绿蒂语 ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">还记得 6/16 窗前那声"Klopstock!"吗？同一个机制——文学共鸣——第一次通向爱，最后一次通向决裂。<span class="ember">这是全书最残忍的对仗。</span></p>
+  </div>
+</section>
+
+<!-- 13 终局 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">13</span>终局 · 1772.12.20–22</div>
+    <h2 class="title reveal d1">平静与狂乱，<em>在同一封信里交替</em></h2>
+    <blockquote class="quote reveal d2">
+      <div class="de">"Es ist beschlossen, Lotte, ich will sterben, und das schreibe ich dir ohne romantische Überspannung, gelassen."</div>
+      <div class="zh">决定了，绿蒂，我要去死。写这句话时，我没有浪漫的夸张，很平静。</div>
+      <div class="src">12 月 21 日绝笔 ｜ 参考译文</div>
+    </blockquote>
+    <blockquote class="quote bloody reveal d3">
+      <div class="de">"--Sie sind geladen--es schlägt zwölfe! So sei es denn!--Lotte! Lotte, lebe wohl! Lebe wohl!"</div>
+      <div class="zh">——枪已上膛——钟敲十二下！就这样吧！——绿蒂！绿蒂，别了！别了！</div>
+      <div class="src">12 月 21 日绝笔末句 ｜ 参考译文</div>
+    </blockquote>
+    <p class="lead reveal d3">他一生都在"决心"与"失控"之间摆动，连赴死都是。编者冷静记下细节：他向阿尔贝特借枪，枪是<span class="blood">绿蒂亲手擦净递出的</span>；桌上摊开莱辛的《爱米丽娅·迦洛蒂》；右眼上方一枪，12 月 22 日正午十二时死去，夜里十一时下葬。</p>
+    <div class="final-line reveal d3">"Kein Geistlicher hat ihn begleitet."</div>
+    <p class="lead reveal d3"><span class="gold">没有教士为他送葬——全书最冷的句子。</span>维特一生都在寻找中介：自然、绿蒂、莪相、上帝。最后他独自死去，拒绝一切中介。这不是浪漫主义的胜利，是浪漫主义的破产。</p>
+  </div>
+</section>
+
+<!-- 14 影响史 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">14</span>影响史</div>
+    <h2 class="title reveal d1">一本书，<em>点燃了一个时代</em></h2>
+    <div class="hscroll reveal d2">
+      <div class="hcard"><div class="yr">1774–1775</div><h4>维特热</h4><p>全欧青年模仿维特装扮（黄背心蓝外套）；"维特"成为时代符号；莱比锡书展后洛阳纸贵。</p></div>
+      <div class="hcard"><div class="yr">1780s</div><h4>拿破仑</h4><p>据说拿破仑行军途中七读《维特》，远征埃及时也带在身旁；后与歌德本人长谈此书。</p></div>
+      <div class="hcard"><div class="yr">欧洲多国</div><h4>查禁</h4><p>因诱发模仿自杀之争议，在丹麦、莱比锡、米兰等地被禁或需删节出版；教会谴责。</p></div>
+      <div class="hcard"><div class="yr">1974</div><h4>维特效应</h4><p>社会学家 David Phillips 以"维特效应"命名自杀模仿现象，至今是自杀预防研究的核心概念。</p></div>
+    </div>
+    <div class="bolt reveal d3">郭 沫 若 1922</div>
+    <blockquote class="quote reveal d3">
+      <div class="zh" style="color:var(--ink);font-style:normal">"青年男子谁个不善钟情？<br>妙龄女人谁个不善怀春？<br>这是我们人性中的至洁至纯；<br>啊，怎么从此中有惨痛飞迸？<br>可爱的读者哟，你哭他，你爱他，<br>请从非毁之前救起他的声名；<br>你看呀，他出穴的精灵正在向你耳语：<br>请做个堂堂男子，请不要步我后尘。"</div>
+      <div class="src">歌德《绿蒂与维特》题诗 ｜ 郭沫若译（1922 年中国首个全译本卷首）</div>
+    </blockquote>
+  </div>
+</section>
+
+<!-- 15 反方+结语 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="no">15</span>反方自检 · 结语</div>
+    <h2 class="title reveal d1">今天的维特，<em>会怎样？</em></h2>
+    <div class="verdict reveal d2">
+      <div class="v against">
+        <h4>反对意见</h4>
+        <p>维特是自我纵容的典型：有退路（朋友劝告、公职机会、离开瓦尔海姆），却拒绝一切"改善"，把单恋升华为殉道、把自杀浪漫化。放在今天，他会被建议接受心理治疗，而不是被文学史供奉。</p>
+      </div>
+      <div class="v for">
+        <h4>为什么仍然成立</h4>
+        <p>反对的前提是"这只是心理问题"。但文本显示他的绝望三分之二是结构性的：等级制度、职业窒息、无出路感。歌德写的是抑郁如何被世界制造——"永恒吞噬的怪物"至今仍是抑郁最精确的比喻。读它，不是为了模仿，是为了理解。</p>
+      </div>
+    </div>
+    <div class="bolt reveal d3">结 语</div>
+    <p class="lead reveal d3">读德文原文最震撼的，是时间的质感：第一编的信像夏天一样膨胀，第二编的像冬天的日头越来越短。歌德用信的密度、句子的呼吸，把"心在燃烧"和"心在熄灭"做成纸上的物理事实。</p>
+    <p class="lead reveal d3" style="font-size:clamp(1.05rem,2.2vw,1.3rem)">歌德写完它就去了魏玛做官——他活了下来，维特替他死了。<span class="gold">这本书，是歌德用一次文学自杀换来的余生。</span></p>
+  </div>
+</section>
+
+<footer>
+  <div class="sig">Die Leiden des jungen Werther</div>
+  讲座页面 · 内容基于德文原文（Hamburger Ausgabe Bd.6）全量深读，全部引文经原文核验<br>
+  德文底本：Project Gutenberg #2407/#2408 ｜ 中文参考：关惠文译本（前 15 章）、郭沫若译本（1922）<br>
+  制作：Ariste · 2026-08-08
+</footer>
+
+<script>
+/* 顶部进度条 */
+const bar = document.getElementById('progress');
+addEventListener('scroll', () => {
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, {passive:true});
+
+/* 滚动渐入 */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:.14, rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ===== 信件密度图（真实数据：汉堡版原文逐行统计） ===== */
+const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":"1771-05-13","n":15},{"d":"1771-05-15","n":24},{"d":"1771-05-17","n":37},{"d":"1771-05-22","n":29},{"d":"1771-05-26","n":49},{"d":"1771-05-27","n":31},{"d":"1771-05-30","n":19},{"d":"1771-06-16","n":196},{"d":"1771-06-19","n":14},{"d":"1771-06-21","n":18},{"d":"1771-06-29","n":27},{"d":"1771-07-01","n":34},{"d":"1771-07-06","n":23},{"d":"1771-07-08","n":20},{"d":"1771-07-10","n":7},{"d":"1771-07-11","n":25},{"d":"1771-07-13","n":20},{"d":"1771-07-16","n":13},{"d":"1771-07-18","n":18},{"d":"1771-07-19","n":6},{"d":"1771-07-24","n":15},{"d":"1771-07-26","n":18},{"d":"1771-07-30","n":17},{"d":"1771-08-08","n":41},{"d":"1771-08-10","n":21},{"d":"1771-08-12","n":102},{"d":"1771-08-15","n":17},{"d":"1771-08-18","n":67},{"d":"1771-08-21","n":11},{"d":"1771-08-22","n":17},{"d":"1771-08-28","n":28},{"d":"1771-08-30","n":31},{"d":"1771-09-03","n":7},{"d":"1771-09-10","n":58}],"b2":[{"d":"1771-10-20","n":36},{"d":"1771-11-26","n":16},{"d":"1771-12-24","n":63},{"d":"1772-01-08","n":18},{"d":"1772-01-20","n":39},{"d":"1772-02-08","n":21},{"d":"1772-02-17","n":20},{"d":"1772-02-20","n":24},{"d":"1772-03-15","n":21},{"d":"1772-03-16","n":44},{"d":"1772-03-24","n":23},{"d":"1772-04-19","n":8},{"d":"1772-05-05","n":13},{"d":"1772-05-09","n":20},{"d":"1772-05-25","n":15},{"d":"1772-06-04","n":9},{"d":"1772-06-16","n":13},{"d":"1772-06-18","n":6},{"d":"1772-06-21","n":10},{"d":"1772-06-29","n":15},{"d":"1772-07-05","n":13},{"d":"1772-07-09","n":15},{"d":"1772-07-11","n":10},{"d":"1772-07-13","n":8},{"d":"1772-07-18","n":11},{"d":"1772-07-22","n":6},{"d":"1772-07-25","n":8},{"d":"1772-08-07","n":13},{"d":"1772-08-12","n":15},{"d":"1772-08-15","n":17},{"d":"1772-08-21","n":9},{"d":"1772-08-30","n":11},{"d":"1772-09-03","n":6},{"d":"1772-09-04","n":11},{"d":"1772-09-05","n":13},{"d":"1772-09-12","n":16},{"d":"1772-09-15","n":22},{"d":"1772-10-10","n":17},{"d":"1772-10-19","n":8},{"d":"1772-10-26","n":16},{"d":"1772-10-27","n":9},{"d":"1772-11-08","n":18},{"d":"1772-11-15","n":19},{"d":"1772-11-21","n":6},{"d":"1772-11-24","n":13},{"d":"1772-11-26","n":8},{"d":"1772-11-30","n":8},{"d":"1772-12-04","n":12},{"d":"1772-12-06","n":31}],"ed":[{"d":"1771-12-12","n":41},{"d":"1771-12-14","n":41},{"d":"1771-12-20","n":871}]};
+
+(function(){
+  const W = 1060, H = 240, padL = 46, padR = 16, padT = 24, padB = 40;
+  const svg = document.getElementById('densityChart');
+  const NS = 'http://www.w3.org/2000/svg';
+  const t0 = Date.UTC(1771,4,4), t1 = Date.UTC(1772,11,6);
+  const x = d => padL + (Date.UTC(+d.slice(0,4), +d.slice(5,7)-1, +d.slice(8,10)) - t0) / (t1-t0) * (W-padL-padR);
+  const maxN = 200;
+  const all = [...LETTERS.b1, ...LETTERS.b2, ...LETTERS.ed];
+  const y = n => H - padB - (Math.min(n,maxN)/maxN) * (H-padT-padB);
+
+  // 轴线
+  const ax = document.createElementNS(NS,'line');
+  ax.setAttribute('x1',padL); ax.setAttribute('y1',H-padB); ax.setAttribute('x2',W-padR); ax.setAttribute('y2',H-padB);
+  ax.setAttribute('stroke','rgba(232,182,76,.25)'); ax.setAttribute('stroke-width','1');
+  svg.appendChild(ax);
+
+  // 月份刻度
+  const months = [['1771.5','1771-05-01'],['1771.8','1771-08-01'],['1771.12','1771-12-01'],['1772.4','1772-04-01'],['1772.8','1772-08-01'],['1772.12','1772-12-01']];
+  months.forEach(m => {
+    const tx = document.createElementNS(NS,'text');
+    tx.setAttribute('x', x(m[1])); tx.setAttribute('y', H-padB+20);
+    tx.setAttribute('fill','#5c6577'); tx.setAttribute('font-size','11');
+    tx.textContent = m[0];
+    svg.appendChild(tx);
+  });
+
+  // 区块背景 + 标签
+  const bookX = b => [x(b[0].d), x(b[b.length-1].d)];
+  function zone(dates, label, color){
+    const [x1,x2] = bookX(dates);
+    const r = document.createElementNS(NS,'rect');
+    r.setAttribute('x',x1-6); r.setAttribute('y',padT-8); r.setAttribute('width',x2-x1+12); r.setAttribute('height',H-padT-padB+8);
+    r.setAttribute('fill', color); r.setAttribute('rx','6');
+    svg.appendChild(r);
+    const t = document.createElementNS(NS,'text');
+    t.setAttribute('x',(x1+x2)/2); t.setAttribute('y',padT-16);
+    t.setAttribute('fill','rgba(233,230,221,.55)'); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle'); t.setAttribute('letter-spacing','2');
+    t.textContent = label;
+    svg.appendChild(t);
+  }
+  zone(LETTERS.b1, '第一编 · 五个月 · 36 封', 'rgba(232,182,76,.07)');
+  zone(LETTERS.b2, '第二编 · 十四个月 · 44 封', 'rgba(127,168,217,.07)');
+
+  // 信件柱
+  function bars(list, color){
+    list.forEach((lt,i) => {
+      const bx = x(lt.d), bw = 3.4;
+      const r = document.createElementNS(NS,'rect');
+      r.setAttribute('x',bx-bw/2); r.setAttribute('y',y(lt.n)); r.setAttribute('width',bw);
+      r.setAttribute('height',(H-padB)-y(lt.n));
+      r.setAttribute('fill',color); r.setAttribute('rx','1.6');
+      r.setAttribute('opacity','.85');
+      const g = document.createElementNS(NS,'g');
+      g.appendChild(r);
+      const tt = document.createElementNS(NS,'title');
+      tt.textContent = lt.d + ' · ' + lt.n + ' 行';
+      g.appendChild(tt);
+      svg.appendChild(g);
+    });
+  }
+  bars(LETTERS.b1, '#e8b64c');
+  bars(LETTERS.b2, '#7fa8d9');
+
+  // 标注关键信
+  function mark(date, label, color, dy){
+    const mx = x(date);
+    const l = document.createElementNS(NS,'line');
+    l.setAttribute('x1',mx); l.setAttribute('y1',y(1)); l.setAttribute('x2',mx); l.setAttribute('y2',H-padB);
+    l.setAttribute('stroke',color); l.setAttribute('stroke-dasharray','3 3'); l.setAttribute('stroke-width','1'); l.setAttribute('opacity','.5');
+    svg.appendChild(l);
+    const t = document.createElementNS(NS,'text');
+    t.setAttribute('x',mx); t.setAttribute('y',dy||padT+4);
+    t.setAttribute('fill',color); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle');
+    t.textContent = label;
+    svg.appendChild(t);
+  }
+  mark('1771-06-16','6/16 舞会初遇','#e07b39',padT+4);
+  mark('1771-08-12','8/12 界限对话','#e8b64c',padT+34);
+  mark('1771-08-18','8/18 自然吞噬','#c2453a',padT+18);
+  mark('1772-12-06','12/6 最后一封','#c2453a',padT+4);
+})();
+
+/* ===== 情绪弧线（示意） ===== */
+(function(){
+  const W = 1060, H = 260, padL = 52, padR = 24, padT = 26, padB = 44;
+  const svg = document.getElementById('arcChart');
+  const NS = 'http://www.w3.org/2000/svg';
+  const t0 = Date.UTC(1771,4,4), t1 = Date.UTC(1772,11,21);
+  const X = d => padL + (Date.UTC(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)) - t0)/(t1-t0)*(W-padL-padR);
+  const Y = v => H - padB - v/100*(H-padT-padB);
+  // 关键点（情绪值 0-100，示意）
+  const pts = [
+    ['1771-05-04','解脱',55], ['1771-05-10','自然沉醉',72], ['1771-06-16','狂喜巅峰',95],
+    ['1771-07-13','她爱我！',88], ['1771-07-30','阿尔贝特归来',58], ['1771-08-12','界限对话',50],
+    ['1771-08-18','自然吞噬',32], ['1771-09-10','告别夜',42], ['1771-12-24','社会窒息',38],
+    ['1772-04-19','麻木期',24], ['1772-09-15','复燃',36], ['1772-12-06','彻底绝望',18],
+    ['1772-12-21','决绝·死亡',0]
+  ];
+  // 网格线
+  [25,50,75,100].forEach(v => {
+    const l = document.createElementNS(NS,'line');
+    l.setAttribute('x1',padL); l.setAttribute('y1',Y(v)); l.setAttribute('x2',W-padR); l.setAttribute('y2',Y(v));
+    l.setAttribute('stroke','rgba(233,230,221,.06)'); l.setAttribute('stroke-width','1');
+    svg.appendChild(l);
+  });
+  // 折线
+  const path = pts.map((p,i) => (i?'L':'M') + X(p[0]).toFixed(1) + ' ' + Y(p[2]).toFixed(1)).join(' ');
+  const pl = document.createElementNS(NS,'path');
+  pl.setAttribute('d',path); pl.setAttribute('fill','none');
+  pl.setAttribute('stroke','url(#arcGrad)'); pl.setAttribute('stroke-width','2.6'); pl.setAttribute('stroke-linejoin','round'); pl.setAttribute('stroke-linecap','round');
+  const defs = document.createElementNS(NS,'defs');
+  const grad = document.createElementNS(NS,'linearGradient'); grad.setAttribute('id','arcGrad');
+  grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','1'); grad.setAttribute('y2','0');
+  const st1 = document.createElementNS(NS,'stop'); st1.setAttribute('offset','0'); st1.setAttribute('stop-color','#e8b64c');
+  const st2 = document.createElementNS(NS,'stop'); st2.setAttribute('offset','.55'); st2.setAttribute('stop-color','#e07b39');
+  const st3 = document.createElementNS(NS,'stop'); st3.setAttribute('offset','1'); st3.setAttribute('stop-color','#c2453a');
+  grad.appendChild(st1); grad.appendChild(st2); grad.appendChild(st3); defs.appendChild(grad);
+  svg.appendChild(defs); svg.appendChild(pl);
+  // 面积填充
+  const area = document.createElementNS(NS,'path');
+  area.setAttribute('d', path + ' L' + X(pts[pts.length-1][0]).toFixed(1) + ' ' + (H-padB) + ' L' + X(pts[0][0]).toFixed(1) + ' ' + (H-padB) + ' Z');
+  area.setAttribute('fill','url(#arcArea)'); area.setAttribute('opacity','.5');
+  const ag = document.createElementNS(NS,'linearGradient'); ag.setAttribute('id','arcArea');
+  ag.setAttribute('x1','0'); ag.setAttribute('y1','0'); ag.setAttribute('x2','0'); ag.setAttribute('y2','1');
+  const as1 = document.createElementNS(NS,'stop'); as1.setAttribute('offset','0'); as1.setAttribute('stop-color','#e8b64c'); as1.setAttribute('stop-opacity','.28');
+  const as2 = document.createElementNS(NS,'stop'); as2.setAttribute('offset','1'); as2.setAttribute('stop-color','#c2453a'); as2.setAttribute('stop-opacity','.02');
+  ag.appendChild(as1); ag.appendChild(as2); defs.appendChild(ag);
+  svg.appendChild(area);
+  svg.insertBefore(area, svg.firstChild);
+  // 点与标签（日期标签在拥挤处跳过；情绪标签上下交替防重叠）
+  let lastDateX = -999;
+  pts.forEach((p,i) => {
+    const cx = X(p[0]), cy = Y(p[2]);
+    const c = document.createElementNS(NS,'circle');
+    c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',i===pts.length-1?5:3.4);
+    c.setAttribute('fill', i===pts.length-1 ? '#c2453a' : '#e9e6dd');
+    svg.appendChild(c);
+    // 情绪标签：奇偶交替上/下，避免水平相邻点标签粘连
+    const above = i % 2 === 0;
+    const t = document.createElementNS(NS,'text');
+    t.setAttribute('x',cx); t.setAttribute('y', above ? cy-10 : cy+18);
+    t.setAttribute('fill','#98a1b3'); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle');
+    t.textContent = p[1];
+    svg.appendChild(t);
+    // 日期标签：与上一个标签间距 < 55px 时跳过（如 8/12 与 8/18 紧邻）
+    if (cx - lastDateX >= 55) {
+      const d = document.createElementNS(NS,'text');
+      d.setAttribute('x',cx); d.setAttribute('y',H-padB+16);
+      d.setAttribute('fill','#5c6577'); d.setAttribute('font-size','10'); d.setAttribute('text-anchor','middle');
+      d.textContent = p[0].slice(5).replace('-','/');
+      svg.appendChild(d);
+      lastDateX = cx;
+    }
+  });
+  // 1772 年分界虚线
+  const yb = X('1772-01-01');
+  const yl = document.createElementNS(NS,'line');
+  yl.setAttribute('x1',yb); yl.setAttribute('y1',padT-4); yl.setAttribute('x2',yb); yl.setAttribute('y2',H-padB);
+  yl.setAttribute('stroke','rgba(233,230,221,.18)'); yl.setAttribute('stroke-dasharray','2 5'); yl.setAttribute('stroke-width','1');
+  svg.appendChild(yl);
+  const yt = document.createElementNS(NS,'text');
+  yt.setAttribute('x',yb+6); yt.setAttribute('y',padT-4);
+  yt.setAttribute('fill','#5c6577'); yt.setAttribute('font-size','10');
+  yt.textContent = '1772 →';
+  svg.appendChild(yt);
+})();
+</script>
+</body>
+</html>
