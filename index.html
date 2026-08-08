@@ -48,7 +48,7 @@ p{margin-bottom:1rem}
 blockquote.quote{border-left:3px solid var(--gold);padding:.4rem 0 .4rem 1.4rem;margin:1.6rem 0}
 blockquote.quote .de{font-family:var(--serif);font-size:clamp(1.25rem,3vw,1.9rem);line-height:1.5;color:var(--ink);font-style:italic}
 blockquote.quote .zh{color:var(--dim);margin-top:.7rem;font-size:1rem}
-blockquote.quote .src{margin-top:.5rem;font-size:.78rem;color:var(--faint);letter-spacing:.08em}
+blockquote.quote .src{margin-top:.5rem;font-size:.8rem;color:var(--dim);letter-spacing:.08em}
 blockquote.quote.bloody{border-left-color:var(--blood)}
 blockquote.quote.bloody .de{color:#7a1f1f}
 
@@ -98,7 +98,7 @@ svg{width:100%;height:auto;display:block}
 .flip-front .tip{font-size:.72rem;color:var(--faint);margin-top:.8rem;letter-spacing:.1em}
 .flip-back{position:absolute;inset:0;transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center}
 .flip-back .zh{font-size:clamp(1rem,2.2vw,1.25rem);color:var(--ink)}
-.flip-back .src{font-size:.75rem;color:var(--faint);margin-top:.8rem}
+.flip-back .src{font-size:.8rem;color:var(--dim);margin-top:.8rem}
 
 /* 封面 */
 #cover{min-height:100vh;justify-content:center;text-align:center;padding:6vh 5vw}
@@ -125,7 +125,54 @@ svg{width:100%;height:auto;display:block}
 #cover .scrollhint{z-index:2}
 .fig{margin:2.4rem auto 0;max-width:500px;padding:10px 10px 8px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 22px rgba(110,85,40,.18)}
 .fig img{display:block;width:100%;height:auto;border-radius:2px}
-.figcap{margin-top:8px;font-size:.74rem;color:var(--faint);text-align:center;letter-spacing:.04em}
+.figcap{margin-top:8px;font-size:.8rem;color:var(--dim);text-align:center;letter-spacing:.04em}
+
+/* ===== 导航增强 ===== */
+.tocbtn{position:fixed;top:1.1rem;right:1.2rem;z-index:60;padding:.5rem .95rem;border:1px solid var(--line);border-radius:999px;background:var(--bg2);color:var(--ink);font-size:.8rem;letter-spacing:.15em;cursor:pointer;box-shadow:0 2px 10px rgba(110,85,40,.14);font-family:var(--sans)}
+.tocbtn:hover{border-color:var(--gold)}
+.nightbtn{position:fixed;top:1.1rem;left:1.2rem;z-index:60;padding:.5rem .95rem;border:1px solid var(--line);border-radius:999px;background:var(--bg2);color:var(--ink);font-size:.8rem;letter-spacing:.15em;cursor:pointer;box-shadow:0 2px 10px rgba(110,85,40,.14);font-family:var(--sans)}
+.nightbtn:hover{border-color:var(--gold)}
+.tocmask{position:fixed;inset:0;z-index:61;background:rgba(43,58,85,.28);opacity:0;pointer-events:none;transition:opacity .25s}
+.tocmask.on{opacity:1;pointer-events:auto}
+.toc{position:fixed;top:0;right:0;bottom:0;z-index:62;width:min(320px,86vw);background:var(--bg2);border-left:1px solid var(--line);padding:1.4rem 1.1rem 2rem;overflow-y:auto;transform:translateX(105%);transition:transform .3s cubic-bezier(.22,.61,.36,1);box-shadow:-8px 0 30px rgba(43,58,85,.18)}
+.toc.on{transform:none}
+.toc h3{font-family:var(--serif);font-size:1.02rem;letter-spacing:.22em;color:var(--gold);margin:0 0 1rem .3rem}
+.toc a{display:flex;gap:.6rem;align-items:baseline;padding:.5rem .55rem;border-radius:6px;color:var(--dim);text-decoration:none;font-size:.85rem;line-height:1.4}
+.toc a:hover{background:rgba(166,58,58,.08)}
+.toc a.on{background:rgba(166,58,58,.12);color:var(--ink)}
+.toc a .no{font-family:var(--serif);color:var(--gold);font-size:.72rem;min-width:1.7em}
+.toc a .sub{color:var(--faint);font-size:.7rem;margin-left:auto;white-space:nowrap}
+
+/* 投影（暗色）模式：复用风暴夜蓝调色板 */
+body.night{--bg0:#060a14;--bg1:#0b1222;--bg2:#101a30;--bg3:#16223d;--ink:#e9e6dd;--dim:#98a1b3;--faint:#5c6577;--gold:#e8b64c;--ember:#e07b39;--ice:#7fa8d9;--blood:#c2453a;--line:rgba(232,182,76,.2)}
+body.night .coverart{opacity:.3;filter:saturate(.7) brightness(.55) sepia(.15)}
+body.night #cover::after{background:linear-gradient(180deg,rgba(6,10,20,.74) 0%,rgba(6,10,20,.87) 50%,rgba(6,10,20,.96) 100%)}
+body.night .fig{border-color:rgba(232,182,76,.22);background:var(--bg2);box-shadow:0 8px 24px rgba(0,0,0,.45)}
+body.night .fig img{filter:sepia(.18) brightness(.88) saturate(.8)}
+body.night .waxseal{box-shadow:0 5px 16px rgba(0,0,0,.5), inset 0 0 0 3px rgba(255,222,190,.28), inset 0 0 0 7px rgba(110,20,20,.35)}
+body.night svg text{fill:#98a1b3}
+body.night #arcGrad stop:nth-of-type(1){stop-color:#e8b64c}
+body.night #arcGrad stop:nth-of-type(2){stop-color:#e07b39}
+body.night #arcGrad stop:nth-of-type(3){stop-color:#7fa8d9}
+body.night #arcArea stop:nth-of-type(1){stop-color:#e8b64c}
+body.night #arcArea stop:nth-of-type(2){stop-color:#7fa8d9}
+body.night .ap{fill:#98a1b3}
+body.night .dp{fill:#c2453a}
+body.night .dm{stroke:#e07b39}
+
+/* 章节分隔符（信封折痕） */
+.fold{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 2.6rem;max-width:420px}
+.fold::before,.fold::after{content:"";flex:1;border-top:1px solid var(--line)}
+.fold .fd{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #b8453a, #8b1a1a 70%);box-shadow:0 0 0 3px var(--bg0)}
+@media (max-width:640px){
+  .fold{margin-bottom:1.7rem}
+  .kicker{letter-spacing:.18em;font-size:.7rem}
+  #cover .book{font-size:clamp(2.1rem,9.5vw,5.6rem)}
+}
+
+/* 图表 tooltip */
+.charttip{position:fixed;z-index:70;pointer-events:none;background:var(--ink);color:var(--bg0);font-size:.72rem;padding:.28rem .6rem;border-radius:4px;white-space:nowrap;opacity:0;transition:opacity .12s;font-family:var(--sans)}
+.charttip.on{opacity:1}
 
 /* 闪电分隔 */
 .bolt{display:flex;align-items:center;gap:1rem;margin:2.4rem 0 1.4rem;color:var(--gold);font-size:.75rem;letter-spacing:.3em}
@@ -184,6 +231,11 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </head>
 <body>
 <div id="progress"></div>
+<button class="nightbtn" id="nightBtn" aria-label="切换投影暗色模式">投影</button>
+<button class="tocbtn" id="tocBtn" aria-label="打开目录">☰ 目录</button>
+<div class="tocmask" id="tocMask"></div>
+<nav class="toc" id="toc" aria-label="章节目录"><h3>目 录</h3><div id="tocList"></div></nav>
+<div class="charttip" id="chartTip"></div>
 
 <!-- 01 封面 -->
 <section id="cover">
@@ -199,7 +251,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 02 钩子 -->
-<section>
+<section id="s2">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">02</span>为什么 250 年后还要读</div>
     <h2 class="title reveal d1">每个时代，<em>都有自己的维特</em></h2>
@@ -216,7 +269,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 03 诞生 -->
-<section>
+<section id="s3">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">03</span>这本书是怎么来的</div>
     <h2 class="title reveal d1">四个星期的梦游，<em>一次文学自杀</em></h2>
@@ -230,7 +284,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 04 书信体 + 密度图 -->
-<section>
+<section id="s4">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">04</span>形式即内容</div>
     <h2 class="title reveal d1">书信体 = <em>心跳监测仪</em></h2>
@@ -245,7 +300,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 05 四季时间轴 -->
-<section>
+<section id="s5">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">05</span>节奏地图</div>
     <h2 class="title reveal d1">四季即命运：<em>情绪的地质学</em></h2>
@@ -264,7 +320,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 06 开篇悖论 -->
-<section>
+<section id="s6">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">06</span>第一句话</div>
     <h2 class="title reveal d1">全书以一个悖论开场</h2>
@@ -285,7 +342,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 07 田园 -->
-<section>
+<section id="s7">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">07</span>第一幕 · 田园</div>
     <h2 class="title reveal d1">自然的顶峰礼赞，<em>与艺术的失效</em></h2>
@@ -306,7 +364,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 08 6/16 心脏 -->
-<section>
+<section id="s8">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">08</span>全书的心脏 · 1771.6.16</div>
     <h2 class="title reveal d1">一个词的爱情：<em>"Klopstock!"</em></h2>
@@ -339,7 +398,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 09 8/12 界限 -->
-<section>
+<section id="s9">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">09</span>思想的枢纽 · 1771.8.12</div>
     <h2 class="title reveal d1">界限之争：<em>手枪桌上的哲学</em></h2>
@@ -365,7 +425,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 10 8/18 转折 -->
-<section>
+<section id="s10">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">10</span>情绪的转折 · 1771.8.18</div>
     <h2 class="title reveal d1">自然吞噬：<em>抑郁的地质学</em></h2>
@@ -384,7 +445,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 11 社会 -->
-<section>
+<section id="s11">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">11</span>第二幕 · 社会的绞杀</div>
     <h2 class="title reveal d1">致命的，不只是爱情</h2>
@@ -399,7 +461,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 12 莪相之夜 -->
-<section>
+<section id="s12">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">12</span>黑暗倒影</div>
     <h2 class="title reveal d1">同一个词，<em>第二次是决裂</em></h2>
@@ -420,7 +483,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 13 终局 -->
-<section>
+<section id="s13">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">13</span>终局 · 1772.12.20–22</div>
     <h2 class="title reveal d1">平静与狂乱，<em>在同一封信里交替</em></h2>
@@ -442,7 +506,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 14 影响史 -->
-<section>
+<section id="s14">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">14</span>影响史</div>
     <h2 class="title reveal d1">一本书，<em>点燃了一个时代</em></h2>
@@ -462,7 +527,8 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
 </section>
 
 <!-- 15 反方+结语 -->
-<section>
+<section id="s15">
+  <div class="fold reveal d1" aria-hidden="true"><span class="fd"></span></div>
   <div class="wrap">
     <div class="kicker reveal"><span class="no">15</span>反方自检 · 结语</div>
     <h2 class="title reveal d1">今天的维特，<em>会怎样？</em></h2>
@@ -559,10 +625,12 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
       r.setAttribute('fill',color); r.setAttribute('rx','1.6');
       r.setAttribute('opacity','.85');
       const g = document.createElementNS(NS,'g');
+      g.setAttribute('class','bar');
       g.appendChild(r);
-      const tt = document.createElementNS(NS,'title');
-      tt.textContent = lt.d + ' · ' + lt.n + ' 行';
-      g.appendChild(tt);
+      const tip = document.getElementById('chartTip');
+      g.addEventListener('mouseenter', () => { tip.textContent = lt.d + ' · ' + lt.n + ' 行'; tip.classList.add('on'); });
+      g.addEventListener('mousemove', e => { tip.style.left = (e.clientX+12)+'px'; tip.style.top = (e.clientY+12)+'px'; });
+      g.addEventListener('mouseleave', () => tip.classList.remove('on'));
       svg.appendChild(g);
     });
   }
@@ -574,11 +642,11 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
     const mx = x(date);
     const l = document.createElementNS(NS,'line');
     l.setAttribute('x1',mx); l.setAttribute('y1',y(1)); l.setAttribute('x2',mx); l.setAttribute('y2',H-padB);
-    l.setAttribute('stroke',color); l.setAttribute('stroke-dasharray','3 3'); l.setAttribute('stroke-width','1'); l.setAttribute('opacity','.5');
+    l.setAttribute('stroke',color); l.setAttribute('stroke-dasharray','3 3'); l.setAttribute('stroke-width','1'); l.setAttribute('opacity','.5'); l.setAttribute('class','dm');
     svg.appendChild(l);
     const t = document.createElementNS(NS,'text');
     t.setAttribute('x',mx); t.setAttribute('y',dy||padT+4);
-    t.setAttribute('fill',color); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle');
+    t.setAttribute('fill',color); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle'); t.setAttribute('class','dm');
     t.textContent = label;
     svg.appendChild(t);
   }
@@ -642,6 +710,12 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
     const c = document.createElementNS(NS,'circle');
     c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',i===pts.length-1?5:3.4);
     c.setAttribute('fill', i===pts.length-1 ? '#7a1f1f' : '#2b3a55');
+    c.setAttribute('class', i===pts.length-1 ? 'dp' : 'ap');
+    c.style.cursor = 'pointer';
+    const tip2 = document.getElementById('chartTip');
+    c.addEventListener('mouseenter', () => { tip2.textContent = p[0] + ' · ' + p[1] + '（示意 ' + p[2] + '）'; tip2.classList.add('on'); });
+    c.addEventListener('mousemove', e => { tip2.style.left = (e.clientX+12)+'px'; tip2.style.top = (e.clientY+12)+'px'; });
+    c.addEventListener('mouseleave', () => tip2.classList.remove('on'));
     svg.appendChild(c);
     // 情绪标签：奇偶交替上/下，避免水平相邻点标签粘连
     const above = i % 2 === 0;
@@ -672,6 +746,71 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
   yt.textContent = '1772 →';
   svg.appendChild(yt);
 })();
+
+/* ===== 目录抽屉 + 深链 + 键盘导航 + 投影模式 + 数字动效 ===== */
+const NAV = [
+  ['cover','01','封面','1774 · 狂飙突进'],
+  ['s2','02','为什么 250 年后还要读','维特效应'],
+  ['s3','03','这本书是怎么来的','四周成书'],
+  ['s4','04','书信体 = 心跳监测仪','83 封信'],
+  ['s5','05','四季即命运','情绪的地质学'],
+  ['s6','06','全书以一个悖论开场','weg bin!'],
+  ['s7','07','自然的顶峰礼赞','荷马=摇篮曲'],
+  ['s8','08','一个词的爱情','Klopstock!'],
+  ['s9','09','界限之争','手枪桌上的哲学'],
+  ['s10','10','自然吞噬','抑郁的地质学'],
+  ['s11','11','致命的，不只是爱情','社会绞杀'],
+  ['s12','12','同一个词，第二次是决裂','莪相之夜'],
+  ['s13','13','平静与狂乱','终局'],
+  ['s14','14','一本书，点燃了一个时代','影响史'],
+  ['s15','15','今天的维特，会怎样？','反方与结语']
+];
+const tocList = document.getElementById('tocList'), links = {};
+NAV.forEach(n => {
+  const a = document.createElement('a');
+  a.href = '#' + n[0];
+  a.innerHTML = '<span class="no">' + n[1] + '</span>' + n[2] + '<span class="sub">' + n[3] + '</span>';
+  a.addEventListener('click', e => { e.preventDefault(); document.getElementById(n[0]).scrollIntoView({behavior:'smooth'}); closeToc(); });
+  tocList.appendChild(a); links[n[0]] = a;
+});
+const toc = document.getElementById('toc'), mask = document.getElementById('tocMask');
+function openToc(){ toc.classList.add('on'); mask.classList.add('on'); }
+function closeToc(){ toc.classList.remove('on'); mask.classList.remove('on'); }
+document.getElementById('tocBtn').addEventListener('click', openToc);
+mask.addEventListener('click', closeToc);
+addEventListener('keydown', e => { if (e.key === 'Escape') closeToc(); });
+const ioAct = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting){ Object.values(links).forEach(l => l.classList.remove('on')); links[e.target.id].classList.add('on'); } });
+}, {rootMargin:'-45% 0px -45% 0px', threshold:0});
+document.querySelectorAll('section[id]').forEach(s => ioAct.observe(s));
+
+/* 键盘逐屏导航（演讲者模式） */
+addEventListener('keydown', e => {
+  if (!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','PageDown','PageUp'].includes(e.key)) return;
+  const secs = [...document.querySelectorAll('section')];
+  const cur = secs.findIndex(s => { const r = s.getBoundingClientRect(); return r.top <= 140 && r.bottom > 140; });
+  let t = cur;
+  if (['ArrowRight','ArrowDown','PageDown'].includes(e.key)) t = Math.min(cur + 1, secs.length - 1);
+  else t = Math.max(cur - 1, 0);
+  if (t !== cur){ e.preventDefault(); secs[t].scrollIntoView({behavior:'smooth'}); }
+});
+
+/* 投影模式切换（localStorage 记忆） */
+const nb = document.getElementById('nightBtn');
+function syncNight(){ nb.textContent = document.body.classList.contains('night') ? '纸色' : '投影'; }
+if (localStorage.getItem('werther-night') === '1') document.body.classList.add('night');
+syncNight();
+nb.addEventListener('click', () => { document.body.classList.toggle('night'); localStorage.setItem('werther-night', document.body.classList.contains('night') ? '1' : '0'); syncNight(); });
+
+/* 数字进场动效 */
+function countUp(el){
+  const m = el.textContent.match(/^([\d,]+)(.*)$/);
+  if (!m) return;
+  const target = +m[1].replace(/,/g,''), suf = m[2], t0 = performance.now(), dur = 1100;
+  (function step(t){ const p = Math.min((t - t0) / dur, 1); el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(step); })(t0);
+}
+const ioStat = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting){ countUp(e.target); ioStat.unobserve(e.target); } }); }, {threshold:.5});
+document.querySelectorAll('.stat .n').forEach(el => ioStat.observe(el));
 </script>
 </body>
 </html>
