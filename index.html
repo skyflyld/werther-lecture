@@ -7,29 +7,24 @@
 <meta name="description" content="基于德文原文（汉堡版）全量深读的《少年维特之烦恼》讲座页：信的密度、四季的节奏、一个词的爱情，以及没有教士送葬的终局。">
 <style>
 :root{
-  --bg0:#060a14; --bg1:#0b1222; --bg2:#101a30; --bg3:#16223d;
-  --ink:#e9e6dd; --dim:#98a1b3; --faint:#5c6577;
-  --gold:#e8b64c; --ember:#e07b39; --ice:#7fa8d9; --blood:#c2453a;
-  --line:rgba(232,182,76,.18);
+  --bg0:#f6ecd6; --bg1:#f1e4c8; --bg2:#fbf3e1; --bg3:#ecdcba;
+  --ink:#2b3a55; --dim:#5a6b85; --faint:#8b97ab;
+  --gold:#a63a3a; --ember:#8b1a1a; --ice:#3a5a8c; --blood:#7a1f1f;
+  --line:rgba(139,26,26,.22);
   --serif:"Georgia","Songti SC","SimSun",serif;
   --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg0);color:var(--ink);font-family:var(--sans);line-height:1.75;overflow-x:hidden}
-::selection{background:rgba(232,182,76,.35)}
+::selection{background:rgba(166,58,58,.28)}
 
-/* 星空噪点背景 */
+/* 信纸纹理背景 */
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.28) 50%, transparent 51%),
-    radial-gradient(1px 1px at 32% 62%, rgba(255,255,255,.18) 50%, transparent 51%),
-    radial-gradient(1.5px 1.5px at 58% 28%, rgba(255,255,255,.15) 50%, transparent 51%),
-    radial-gradient(1px 1px at 76% 74%, rgba(255,255,255,.20) 50%, transparent 51%),
-    radial-gradient(1px 1px at 88% 34%, rgba(255,255,255,.14) 50%, transparent 51%),
-    radial-gradient(1.5px 1.5px at 22% 84%, rgba(255,255,255,.12) 50%, transparent 51%),
-    radial-gradient(1px 1px at 45% 46%, rgba(255,255,255,.10) 50%, transparent 51%),
-    radial-gradient(ellipse at 50% 120%, rgba(26,42,84,.55), transparent 70%);
+    radial-gradient(rgba(139,107,60,.045) 1px, transparent 1.2px) 0 0/4px 4px,
+    radial-gradient(ellipse at 50% -10%, rgba(255,253,245,.75), transparent 55%),
+    radial-gradient(ellipse at 50% 115%, rgba(139,107,60,.10), transparent 65%);
 }
 
 /* 顶部进度条 */
@@ -55,7 +50,7 @@ blockquote.quote .de{font-family:var(--serif);font-size:clamp(1.25rem,3vw,1.9rem
 blockquote.quote .zh{color:var(--dim);margin-top:.7rem;font-size:1rem}
 blockquote.quote .src{margin-top:.5rem;font-size:.78rem;color:var(--faint);letter-spacing:.08em}
 blockquote.quote.bloody{border-left-color:var(--blood)}
-blockquote.quote.bloody .de{color:#e8c9c2}
+blockquote.quote.bloody .de{color:#7a1f1f}
 
 /* 双栏（维特 vs 阿尔贝特） */
 .duel{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem}
@@ -67,7 +62,7 @@ blockquote.quote.bloody .de{color:#e8c9c2}
 /* 卡片 */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.8rem}
 .card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.3rem;transition:transform .25s ease,border-color .25s}
-.card:hover{transform:translateY(-4px);border-color:rgba(232,182,76,.45)}
+.card:hover{transform:translateY(-4px);border-color:rgba(166,58,58,.45)}
 .card .big{font-size:1.7rem;font-weight:800;color:var(--gold);font-family:var(--serif)}
 .card h4{font-size:1rem;margin:.4rem 0 .4rem;color:var(--ink)}
 .card p{font-size:.86rem;color:var(--dim);margin:0}
@@ -114,13 +109,22 @@ svg{width:100%;height:auto;display:block}
 #cover .scrollhint{position:absolute;bottom:3vh;left:0;right:0;font-size:.75rem;color:var(--faint);letter-spacing:.3em;animation:bob 2.2s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 
+/* 火漆印章 */
+.waxseal{width:96px;height:96px;margin:2.8rem auto 0;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, #b8453a, #8b1a1a 58%, #6e1414);
+  box-shadow:0 5px 16px rgba(110,20,20,.38), inset 0 0 0 3px rgba(255,222,190,.28), inset 0 0 0 7px rgba(110,20,20,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:1.12rem;font-weight:700;color:#f3d9c4;letter-spacing:.1em;
+  transform:rotate(-8deg)}
+.waxseal .inner{border:1px dashed rgba(243,217,196,.45);width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
 /* 闪电分隔 */
 .bolt{display:flex;align-items:center;gap:1rem;margin:2.4rem 0 1.4rem;color:var(--gold);font-size:.75rem;letter-spacing:.3em}
 .bolt::before,.bolt::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
 .bolt::after{background:linear-gradient(90deg,var(--line),transparent)}
 
 /* 终局大字 */
-.final-line{font-family:var(--serif);font-size:clamp(1.4rem,3.6vw,2.6rem);font-style:italic;line-height:1.5;color:#e8c9c2;margin:2rem 0}
+.final-line{font-family:var(--serif);font-size:clamp(1.4rem,3.6vw,2.6rem);font-style:italic;line-height:1.5;color:#7a1f1f;margin:2rem 0}
 
 /* 影响史横卡 */
 .hscroll{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-top:1.8rem}
@@ -132,14 +136,14 @@ svg{width:100%;height:auto;display:block}
 /* 反方双块 */
 .verdict{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem}
 .verdict .v{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.4rem 1.5rem}
-.verdict .v.against{border-color:rgba(194,69,58,.4)}
-.verdict .v.for{border-color:rgba(232,182,76,.4)}
+.verdict .v.against{border-color:rgba(122,31,31,.35)}
+.verdict .v.for{border-color:rgba(166,58,58,.35)}
 .verdict h4{font-size:.85rem;letter-spacing:.18em;margin-bottom:.7rem}
 .verdict .v.against h4{color:var(--blood)} .verdict .v.for h4{color:var(--gold)}
 .verdict p{font-size:.92rem;color:var(--dim);margin:0}
 
 /* 页脚 */
-footer{position:relative;z-index:1;padding:3rem 7vw 4rem;text-align:center;color:var(--faint);font-size:.78rem;line-height:2;border-top:1px solid rgba(232,182,76,.08)}
+footer{position:relative;z-index:1;padding:3rem 7vw 4rem;text-align:center;color:var(--faint);font-size:.78rem;line-height:2;border-top:1px solid rgba(139,26,26,.15)}
 footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spacing:.2em}
 
 /* 滚动渐入 */
@@ -179,6 +183,7 @@ footer .sig{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spa
     <h1 class="book"><span class="j">少年维特之烦恼</span>Die Leiden des jungen Werther</h1>
     <div class="sub">1774 · 狂飙突进的第一声啼哭</div>
     <div class="meta">一场关于"感觉"的讲座 · 基于德文原文（汉堡版）全量深读</div>
+    <div class="waxseal"><div class="inner">1774</div></div>
   </div>
   <div class="scrollhint">向下滚动，进入 1771 年的那个夏天</div>
 </section>
@@ -497,7 +502,7 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
   // 轴线
   const ax = document.createElementNS(NS,'line');
   ax.setAttribute('x1',padL); ax.setAttribute('y1',H-padB); ax.setAttribute('x2',W-padR); ax.setAttribute('y2',H-padB);
-  ax.setAttribute('stroke','rgba(232,182,76,.25)'); ax.setAttribute('stroke-width','1');
+  ax.setAttribute('stroke','rgba(139,26,26,.4)'); ax.setAttribute('stroke-width','1');
   svg.appendChild(ax);
 
   // 月份刻度
@@ -505,7 +510,7 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
   months.forEach(m => {
     const tx = document.createElementNS(NS,'text');
     tx.setAttribute('x', x(m[1])); tx.setAttribute('y', H-padB+20);
-    tx.setAttribute('fill','#5c6577'); tx.setAttribute('font-size','11');
+    tx.setAttribute('fill','#8b97ab'); tx.setAttribute('font-size','11');
     tx.textContent = m[0];
     svg.appendChild(tx);
   });
@@ -520,12 +525,12 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
     svg.appendChild(r);
     const t = document.createElementNS(NS,'text');
     t.setAttribute('x',(x1+x2)/2); t.setAttribute('y',padT-16);
-    t.setAttribute('fill','rgba(233,230,221,.55)'); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle'); t.setAttribute('letter-spacing','2');
+    t.setAttribute('fill','rgba(43,58,85,.55)'); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle'); t.setAttribute('letter-spacing','2');
     t.textContent = label;
     svg.appendChild(t);
   }
-  zone(LETTERS.b1, '第一编 · 五个月 · 36 封', 'rgba(232,182,76,.07)');
-  zone(LETTERS.b2, '第二编 · 十四个月 · 44 封', 'rgba(127,168,217,.07)');
+  zone(LETTERS.b1, '第一编 · 五个月 · 36 封', 'rgba(166,58,58,.09)');
+  zone(LETTERS.b2, '第二编 · 十四个月 · 44 封', 'rgba(58,90,140,.09)');
 
   // 信件柱
   function bars(list, color){
@@ -544,8 +549,8 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
       svg.appendChild(g);
     });
   }
-  bars(LETTERS.b1, '#e8b64c');
-  bars(LETTERS.b2, '#7fa8d9');
+  bars(LETTERS.b1, '#a63a3a');
+  bars(LETTERS.b2, '#3a5a8c');
 
   // 标注关键信
   function mark(date, label, color, dy){
@@ -560,10 +565,10 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
     t.textContent = label;
     svg.appendChild(t);
   }
-  mark('1771-06-16','6/16 舞会初遇','#e07b39',padT+4);
-  mark('1771-08-12','8/12 界限对话','#e8b64c',padT+34);
-  mark('1771-08-18','8/18 自然吞噬','#c2453a',padT+18);
-  mark('1772-12-06','12/6 最后一封','#c2453a',padT+4);
+  mark('1771-06-16','6/16 舞会初遇','#a63a3a',padT+4);
+  mark('1771-08-12','8/12 界限对话','#8b1a1a',padT+34);
+  mark('1771-08-18','8/18 自然吞噬','#7a1f1f',padT+18);
+  mark('1772-12-06','12/6 最后一封','#7a1f1f',padT+4);
 })();
 
 /* ===== 情绪弧线（示意） ===== */
@@ -586,7 +591,7 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
   [25,50,75,100].forEach(v => {
     const l = document.createElementNS(NS,'line');
     l.setAttribute('x1',padL); l.setAttribute('y1',Y(v)); l.setAttribute('x2',W-padR); l.setAttribute('y2',Y(v));
-    l.setAttribute('stroke','rgba(233,230,221,.06)'); l.setAttribute('stroke-width','1');
+    l.setAttribute('stroke','rgba(43,58,85,.10)'); l.setAttribute('stroke-width','1');
     svg.appendChild(l);
   });
   // 折线
@@ -597,9 +602,9 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
   const defs = document.createElementNS(NS,'defs');
   const grad = document.createElementNS(NS,'linearGradient'); grad.setAttribute('id','arcGrad');
   grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','1'); grad.setAttribute('y2','0');
-  const st1 = document.createElementNS(NS,'stop'); st1.setAttribute('offset','0'); st1.setAttribute('stop-color','#e8b64c');
-  const st2 = document.createElementNS(NS,'stop'); st2.setAttribute('offset','.55'); st2.setAttribute('stop-color','#e07b39');
-  const st3 = document.createElementNS(NS,'stop'); st3.setAttribute('offset','1'); st3.setAttribute('stop-color','#c2453a');
+  const st1 = document.createElementNS(NS,'stop'); st1.setAttribute('offset','0'); st1.setAttribute('stop-color','#a63a3a');
+  const st2 = document.createElementNS(NS,'stop'); st2.setAttribute('offset','.55'); st2.setAttribute('stop-color','#8b1a1a');
+  const st3 = document.createElementNS(NS,'stop'); st3.setAttribute('offset','1'); st3.setAttribute('stop-color','#2b3a55');
   grad.appendChild(st1); grad.appendChild(st2); grad.appendChild(st3); defs.appendChild(grad);
   svg.appendChild(defs); svg.appendChild(pl);
   // 面积填充
@@ -608,8 +613,8 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
   area.setAttribute('fill','url(#arcArea)'); area.setAttribute('opacity','.5');
   const ag = document.createElementNS(NS,'linearGradient'); ag.setAttribute('id','arcArea');
   ag.setAttribute('x1','0'); ag.setAttribute('y1','0'); ag.setAttribute('x2','0'); ag.setAttribute('y2','1');
-  const as1 = document.createElementNS(NS,'stop'); as1.setAttribute('offset','0'); as1.setAttribute('stop-color','#e8b64c'); as1.setAttribute('stop-opacity','.28');
-  const as2 = document.createElementNS(NS,'stop'); as2.setAttribute('offset','1'); as2.setAttribute('stop-color','#c2453a'); as2.setAttribute('stop-opacity','.02');
+  const as1 = document.createElementNS(NS,'stop'); as1.setAttribute('offset','0'); as1.setAttribute('stop-color','#a63a3a'); as1.setAttribute('stop-opacity','.22');
+  const as2 = document.createElementNS(NS,'stop'); as2.setAttribute('offset','1'); as2.setAttribute('stop-color','#3a5a8c'); as2.setAttribute('stop-opacity','.07');
   ag.appendChild(as1); ag.appendChild(as2); defs.appendChild(ag);
   svg.appendChild(area);
   svg.insertBefore(area, svg.firstChild);
@@ -619,20 +624,20 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
     const cx = X(p[0]), cy = Y(p[2]);
     const c = document.createElementNS(NS,'circle');
     c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',i===pts.length-1?5:3.4);
-    c.setAttribute('fill', i===pts.length-1 ? '#c2453a' : '#e9e6dd');
+    c.setAttribute('fill', i===pts.length-1 ? '#7a1f1f' : '#2b3a55');
     svg.appendChild(c);
     // 情绪标签：奇偶交替上/下，避免水平相邻点标签粘连
     const above = i % 2 === 0;
     const t = document.createElementNS(NS,'text');
     t.setAttribute('x',cx); t.setAttribute('y', above ? cy-10 : cy+18);
-    t.setAttribute('fill','#98a1b3'); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle');
+    t.setAttribute('fill','#6b7a94'); t.setAttribute('font-size','11'); t.setAttribute('text-anchor','middle');
     t.textContent = p[1];
     svg.appendChild(t);
     // 日期标签：与上一个标签间距 < 55px 时跳过（如 8/12 与 8/18 紧邻）
     if (cx - lastDateX >= 55) {
       const d = document.createElementNS(NS,'text');
       d.setAttribute('x',cx); d.setAttribute('y',H-padB+16);
-      d.setAttribute('fill','#5c6577'); d.setAttribute('font-size','10'); d.setAttribute('text-anchor','middle');
+      d.setAttribute('fill','#8b97ab'); d.setAttribute('font-size','10'); d.setAttribute('text-anchor','middle');
       d.textContent = p[0].slice(5).replace('-','/');
       svg.appendChild(d);
       lastDateX = cx;
@@ -642,11 +647,11 @@ const LETTERS = {"b1":[{"d":"1771-05-04","n":58},{"d":"1771-05-10","n":46},{"d":
   const yb = X('1772-01-01');
   const yl = document.createElementNS(NS,'line');
   yl.setAttribute('x1',yb); yl.setAttribute('y1',padT-4); yl.setAttribute('x2',yb); yl.setAttribute('y2',H-padB);
-  yl.setAttribute('stroke','rgba(233,230,221,.18)'); yl.setAttribute('stroke-dasharray','2 5'); yl.setAttribute('stroke-width','1');
+  yl.setAttribute('stroke','rgba(43,58,85,.22)'); yl.setAttribute('stroke-dasharray','2 5'); yl.setAttribute('stroke-width','1');
   svg.appendChild(yl);
   const yt = document.createElementNS(NS,'text');
   yt.setAttribute('x',yb+6); yt.setAttribute('y',padT-4);
-  yt.setAttribute('fill','#5c6577'); yt.setAttribute('font-size','10');
+  yt.setAttribute('fill','#8b97ab'); yt.setAttribute('font-size','10');
   yt.textContent = '1772 →';
   svg.appendChild(yt);
 })();
